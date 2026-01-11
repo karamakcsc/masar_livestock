@@ -43,7 +43,16 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+    "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js",
+    "Purchase Order" : "custom/purchase_order/purchase_order.js",
+    "Purchase Invoice" : "custom/purchase_invoice/purchase_invoice.js",
+    "Sales Order" : "custom/sales_order/sales_order.js",
+    "Delivery Note" : "custom/delivery_note/delivery_note.js",
+    "Stock Entry" : "custom/stock_entry/stock_entry.js",
+    "Sales Invoice" : "custom/sales_invoice/sales_invoice.js",
+    "Batch": "custom/batch/batch.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -137,13 +146,30 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Purchase Receipt": {
+		"validate": "masar_livestock.custom.purchase_receipt.purchase_receipt.validate",
+        # "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
+	},
+    "Purchase Order": {
+        "validate": "masar_livestock.custom.purchase_order.purchase_order.validate",
+    },
+    "Purchase Invoice": {
+        "validate": "masar_livestock.custom.purchase_invoice.purchase_invoice.validate",
+    },
+    "Sales Order": {
+        "validate": "masar_livestock.custom.sales_order.sales_order.validate",
+    },
+    "Delivery Note": {
+        "validate": "masar_livestock.custom.delivery_note.delivery_note.validate",
+    },
+    "Stock Entry": {
+        "validate": "masar_livestock.custom.stock_entry.stock_entry.validate",
+    },
+    "Sales Invoice": {
+        "validate": "masar_livestock.custom.sales_invoice.sales_invoice.validate",
+    },
+}
 
 # Scheduled Tasks
 # ---------------
@@ -247,3 +273,55 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+fixtures = [
+    {"dt": "Custom Field", "filters": [
+        [
+            "name", "in", [
+                "Item-custom_is_livestock",
+                "Purchase Receipt Item-custom_headcount",
+                "Purchase Receipt Item-custom_weight_kg",
+                "Purchase Invoice Item-custom_headcount",
+                "Purchase Invoice Item-custom_weight_kg",
+                "Delivery Note Item-custom_headcount",
+                "Delivery Note Item-custom_weight_kg",
+                "Sales Invoice Item-custom_headcount",
+                "Sales Invoice Item-custom_weight_kg",
+                "Stock Entry Detail-custom_headcount",
+                "Stock Entry Detail-custom_weight_kg",
+                "Purchase Order Item-custom_headcount",
+                "Purchase Order Item-custom_weight_kg",
+                "Sales Order Item-custom_headcount",
+                "Sales Order Item-custom_weight_kg",
+                "Batch-custom_current_weight_kg",
+                "Batch-custom_in_weight_kg",
+                "Batch-custom_out_weight_kg",
+                "Purchase Receipt Item-custom_is_livestock",
+                "Purchase Order Item-custom_is_livestock",
+                "Purchase Invoice Item-custom_is_livestock",
+                "Sales Order Item-custom_is_livestock",
+                "Delivery Note Item-custom_is_livestock",
+                "Stock Entry Detail-custom_is_livestock",
+                "Sales Invoice Item-custom_is_livestock"
+            ]
+        ]
+    ]},
+    {"dt": "Property Setter", "filters": [
+        [
+            "name", "in", [
+                "Purchase Receipt Item-rate-columns",
+                "Purchase Order Item-rate-columns",
+                "Purchase Order Item-amount-columns",
+                "Purchase Invoice Item-qty-columns",
+                "Purchase Invoice Item-rate-columns",
+                "Sales Order Item-delivery_date-columns",
+                "Sales Order Item-rate-columns",
+                "Delivery Note Item-uom-columns",
+                "Delivery Note Item-qty-columns",
+                "Stock Entry Detail-qty-columns",
+                "Stock Entry Detail-basic_rate-columns",
+                "Sales Invoice Item-qty-columns",
+                "Sales Invoice Item-rate-columns"
+            ]
+        ]
+    ]},
+]
