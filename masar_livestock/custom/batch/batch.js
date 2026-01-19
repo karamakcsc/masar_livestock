@@ -13,15 +13,6 @@ frappe.ui.form.on("Batch", {
                         callback(r) {
                             if (r.message) {
                                 frm.reload_doc();
-                                frappe.msgprint({
-                                    title: __("Weight Updated"),
-                                    message: __(
-                                        `IN: ${r.message.in} Kg<br>
-                                         OUT: ${r.message.out} Kg<br>
-                                         CURRENT: ${r.message.current} Kg`
-                                    ),
-                                    indicator: "green"
-                                });
                             }
                         }
                     });

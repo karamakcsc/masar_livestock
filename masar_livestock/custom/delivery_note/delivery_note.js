@@ -41,6 +41,7 @@ frappe.ui.form.on('Delivery Note Item', {
                 setTimeout(() => {
                     let conversion_factor = row.custom_headcount / row.custom_weight_kg;
                     frappe.model.set_value(cdt, cdn, "qty", row.custom_weight_kg);
+                    frappe.model.set_value(cdt, cdn, "stock_qty", row.custom_headcount);
                     frappe.model.set_value(cdt, cdn, "conversion_factor", conversion_factor);
                 }, 600);
             }
@@ -54,6 +55,7 @@ frappe.ui.form.on('Delivery Note Item', {
                 setTimeout(() => {
                     let conversion_factor = row.custom_headcount / row.custom_weight_kg;
                     frappe.model.set_value(cdt, cdn, "qty", row.custom_weight_kg);
+                    frappe.model.set_value(cdt, cdn, "stock_qty", row.custom_headcount);
                     frappe.model.set_value(cdt, cdn, "conversion_factor", conversion_factor);
                 }, 600);
             }

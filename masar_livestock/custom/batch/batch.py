@@ -9,56 +9,65 @@ def sum_weight(query, batch):
 
 @frappe.whitelist()
 def recalculate_livestock_weight(batch_name):
-    in_weight = 0
-    out_weight = 0
+    in_weight = 0.0
+    out_weight = 0.0
 
-    # Purchase Receipt (IN)
     in_weight += sum_weight("""
-        SELECT pri.qty * pri.conversion_factor AS weight
+        SELECT
+            (sbb_item.qty / pri.conversion_factor) AS weight
         FROM `tabPurchase Receipt Item` pri
-        JOIN `tabPurchase Receipt` pr ON pr.name = pri.parent
+        INNER JOIN `tabPurchase Receipt` pr ON pr.name = pri.parent
+        INNER JOIN `tabSerial and Batch Entry` sbb_item
+            ON sbb_item.parent = pri.serial_and_batch_bundle
         WHERE pr.docstatus = 1
-          AND pri.batch_no = %(batch)s
+          AND sbb_item.batch_no = %(batch)s
     """, batch_name)
 
-    # Delivery Note (OUT)
     out_weight += sum_weight("""
-        SELECT dni.qty * dni.conversion_factor AS weight
+        SELECT
+            (sbb_item.qty / dni.conversion_factor) AS weight
         FROM `tabDelivery Note Item` dni
-        JOIN `tabDelivery Note` dn ON dn.name = dni.parent
+        INNER JOIN `tabDelivery Note` dn ON dn.name = dni.parent
+        INNER JOIN `tabSerial and Batch Entry` sbb_item
+            ON sbb_item.parent = dni.serial_and_batch_bundle
         WHERE dn.docstatus = 1
-          AND dni.batch_no = %(batch)s
+          AND sbb_item.batch_no = %(batch)s
     """, batch_name)
 
-    # Sales Invoice (OUT – update stock)
     out_weight += sum_weight("""
-        SELECT sii.qty * sii.conversion_factor AS weight
+        SELECT
+            (sbb_item.qty / sii.conversion_factor) AS weight
         FROM `tabSales Invoice Item` sii
-        JOIN `tabSales Invoice` si ON si.name = sii.parent
+        INNER JOIN `tabSales Invoice` si ON si.name = sii.parent
+        INNER JOIN `tabSerial and Batch Entry` sbb_item
+            ON sbb_item.parent = sii.serial_and_batch_bundle
         WHERE si.docstatus = 1
           AND si.update_stock = 1
-          AND sii.batch_no = %(batch)s
+          AND sbb_item.batch_no = %(batch)s
     """, batch_name)
 
-    # Purchase Invoice (IN – update stock)
     in_weight += sum_weight("""
-        SELECT pii.qty * pii.conversion_factor AS weight
+        SELECT
+            (sbb_item.qty / pii.conversion_factor) AS weight
         FROM `tabPurchase Invoice Item` pii
-        JOIN `tabPurchase Invoice` pi ON pi.name = pii.parent
+        INNER JOIN `tabPurchase Invoice` pi ON pi.name = pii.parent
+        INNER JOIN `tabSerial and Batch Entry` sbb_item
+            ON sbb_item.parent = pii.serial_and_batch_bundle
         WHERE pi.docstatus = 1
           AND pi.update_stock = 1
-          AND pii.batch_no = %(batch)s
+          AND sbb_item.batch_no = %(batch)s
     """, batch_name)
 
-    # Stock Entry (IN & OUT)
     se_data = frappe.db.sql("""
         SELECT
             se.stock_entry_type,
-            sei.qty * sei.conversion_factor AS weight
+            (sbb_item.qty / sei.conversion_factor) AS weight
         FROM `tabStock Entry Detail` sei
-        JOIN `tabStock Entry` se ON se.name = sei.parent
+        INNER JOIN `tabStock Entry` se ON se.name = sei.parent
+        INNER JOIN `tabSerial and Batch Entry` sbb_item
+            ON sbb_item.parent = sei.serial_and_batch_bundle
         WHERE se.docstatus = 1
-          AND sei.batch_no = %(batch)s
+          AND sbb_item.batch_no = %(batch)s
     """, {"batch": batch_name}, as_dict=True)
 
     for row in se_data:
@@ -74,7 +83,7 @@ def recalculate_livestock_weight(batch_name):
     batch.save(ignore_permissions=True)
 
     return {
-        "in": in_weight,
-        "out": out_weight,
-        "current": batch.custom_current_weight_kg
+        "in_weight_kg": in_weight,
+        "out_weight_kg": out_weight,
+        "current_weight_kg": batch.custom_current_weight_kg
     }

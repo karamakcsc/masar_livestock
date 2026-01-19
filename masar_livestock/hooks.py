@@ -320,7 +320,21 @@ fixtures = [
                 "Stock Entry Detail-qty-columns",
                 "Stock Entry Detail-basic_rate-columns",
                 "Sales Invoice Item-qty-columns",
-                "Sales Invoice Item-rate-columns"
+                "Sales Invoice Item-rate-columns",
+                "Purchase Order Item-uom-read_only_depends_on",
+                "Purchase Order Item-qty-read_only_depends_on",
+                "Purchase Receipt Item-uom-read_only_depends_on",
+                "Purchase Receipt Item-qty-read_only_depends_on",
+                "Purchase Invoice Item-uom-read_only_depends_on",
+                "Purchase Invoice Item-qty-read_only_depends_on",
+                "Sales Order Item-uom-read_only_depends_on",
+                "Sales Order Item-qty-read_only_depends_on",
+                "Sales Invoice Item-uom-read_only_depends_on",
+                "Sales Invoice Item-qty-read_only_depends_on",
+                "Delivery Note Item-uom-read_only_depends_on",
+                "Delivery Note Item-qty-read_only_depends_on",
+                "Stock Entry Detail-uom-read_only_depends_on",
+                "Stock Entry Detail-qty-read_only_depends_on"
             ]
         ]
     ]},
