@@ -13,11 +13,10 @@ frappe.ui.form.on('Sales Order Item', {
                     let item = data.message;
                     if (item && item.custom_is_livestock) {
                         setTimeout(() => {
-                            frappe.model.set_value(cdt, cdn, "uom", "Kg");
+                            frappe.model.set_value(cdt, cdn, "uom", "Nos");
                             frappe.model.set_df_property(cdt, cdn, "uom", "read_only", 1);
                             frappe.model.set_df_property(cdt, cdn, "custom_weight_kg", "read_only", 0);
                             frappe.model.set_df_property(cdt, cdn, "custom_headcount", "read_only", 0);
-                            console.log("Item code changed, UOM set to Kg and made read-only.");
                         }, 600);
                     } else {
                         setTimeout(() => {
@@ -26,7 +25,6 @@ frappe.ui.form.on('Sales Order Item', {
                             frappe.model.set_df_property(cdt, cdn, "uom", "read_only", 0);
                             frappe.model.set_df_property(cdt, cdn, "custom_weight_kg", "read_only", 1);
                             frappe.model.set_df_property(cdt, cdn, "custom_headcount", "read_only", 1);
-                            console.log("Item code changed, UOM made editable.");
                         }, 600);
                     }
                 }
@@ -39,9 +37,8 @@ frappe.ui.form.on('Sales Order Item', {
         if (row.item_code && row.custom_weight_kg) {
             if (row.custom_headcount > 0 && row.custom_weight_kg > 0) {
                 setTimeout(() => {
-                    let conversion_factor = row.custom_headcount / row.custom_weight_kg;
-                    frappe.model.set_value(cdt, cdn, "qty", row.custom_weight_kg);
-                    frappe.model.set_value(cdt, cdn, "stock_qty", row.custom_headcount);
+                    let conversion_factor = row.custom_weight_kg / row.custom_headcount;
+                    frappe.model.set_value(cdt, cdn, "qty", row.custom_headcount);
                     frappe.model.set_value(cdt, cdn, "conversion_factor", conversion_factor);
                 }, 600);
             }
@@ -53,9 +50,8 @@ frappe.ui.form.on('Sales Order Item', {
         if (row.item_code && row.custom_weight_kg) {
             if (row.custom_headcount > 0 && row.custom_weight_kg > 0) {
                 setTimeout(() => {
-                    let conversion_factor = row.custom_headcount / row.custom_weight_kg;
-                    frappe.model.set_value(cdt, cdn, "qty", row.custom_weight_kg);
-                    frappe.model.set_value(cdt, cdn, "stock_qty", row.custom_headcount);
+                    let conversion_factor = row.custom_weight_kg / row.custom_headcount;
+                    frappe.model.set_value(cdt, cdn, "qty", row.custom_headcount);
                     frappe.model.set_value(cdt, cdn, "conversion_factor", conversion_factor);
                 }, 600);
             }

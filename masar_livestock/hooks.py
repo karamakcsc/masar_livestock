@@ -149,7 +149,7 @@ doctype_js = {
 doc_events = {
 	"Purchase Receipt": {
 		"validate": "masar_livestock.custom.purchase_receipt.purchase_receipt.validate",
-        # "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
+        "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
 	},
     "Purchase Order": {
         "validate": "masar_livestock.custom.purchase_order.purchase_order.validate",
@@ -334,7 +334,13 @@ fixtures = [
                 "Delivery Note Item-uom-read_only_depends_on",
                 "Delivery Note Item-qty-read_only_depends_on",
                 "Stock Entry Detail-uom-read_only_depends_on",
-                "Stock Entry Detail-qty-read_only_depends_on"
+                "Stock Entry Detail-qty-read_only_depends_on",
+                "Purchase Receipt Item-conversion_factor-precision",
+                "Purchase Invoice Item-conversion_factor-precision",
+                "Sales Order Item-conversion_factor-precision",
+                "Delivery Note Item-conversion_factor-precision",
+                "Sales Invoice Item-conversion_factor-precision",
+                "Purchase Order Item-conversion_factor-precision"
             ]
         ]
     ]},
