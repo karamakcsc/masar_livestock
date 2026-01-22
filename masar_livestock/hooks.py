@@ -149,7 +149,7 @@ doctype_js = {
 doc_events = {
 	"Purchase Receipt": {
 		"validate": "masar_livestock.custom.purchase_receipt.purchase_receipt.validate",
-        "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
+        # "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
 	},
     "Purchase Order": {
         "validate": "masar_livestock.custom.purchase_order.purchase_order.validate",
@@ -279,19 +279,12 @@ fixtures = [
             "name", "in", [
                 "Item-custom_is_livestock",
                 "Purchase Receipt Item-custom_headcount",
-                "Purchase Receipt Item-custom_weight_kg",
                 "Purchase Invoice Item-custom_headcount",
-                "Purchase Invoice Item-custom_weight_kg",
                 "Delivery Note Item-custom_headcount",
-                "Delivery Note Item-custom_weight_kg",
                 "Sales Invoice Item-custom_headcount",
-                "Sales Invoice Item-custom_weight_kg",
                 "Stock Entry Detail-custom_headcount",
-                "Stock Entry Detail-custom_weight_kg",
                 "Purchase Order Item-custom_headcount",
-                "Purchase Order Item-custom_weight_kg",
                 "Sales Order Item-custom_headcount",
-                "Sales Order Item-custom_weight_kg",
                 "Batch-custom_current_weight_kg",
                 "Batch-custom_in_weight_kg",
                 "Batch-custom_out_weight_kg",
@@ -301,7 +294,14 @@ fixtures = [
                 "Sales Order Item-custom_is_livestock",
                 "Delivery Note Item-custom_is_livestock",
                 "Stock Entry Detail-custom_is_livestock",
-                "Sales Invoice Item-custom_is_livestock"
+                "Sales Invoice Item-custom_is_livestock",
+                "Delivery Note Item-custom_weight_per_unit",
+                "Sales Invoice Item-custom_weight_per_unit",
+                "Sales Order Item-custom_weight_per_unit",
+                "Purchase Invoice Item-custom_weight_per_unit",
+                "Purchase Receipt Item-custom_weight_per_unit",
+                "Purchase Order Item-custom_weight_per_unit",
+                "Stock Entry Detail-custom_weight_per_unit"
             ]
         ]
     ]},
@@ -322,25 +322,12 @@ fixtures = [
                 "Sales Invoice Item-qty-columns",
                 "Sales Invoice Item-rate-columns",
                 "Purchase Order Item-uom-read_only_depends_on",
-                "Purchase Order Item-qty-read_only_depends_on",
                 "Purchase Receipt Item-uom-read_only_depends_on",
-                "Purchase Receipt Item-qty-read_only_depends_on",
                 "Purchase Invoice Item-uom-read_only_depends_on",
-                "Purchase Invoice Item-qty-read_only_depends_on",
                 "Sales Order Item-uom-read_only_depends_on",
-                "Sales Order Item-qty-read_only_depends_on",
                 "Sales Invoice Item-uom-read_only_depends_on",
-                "Sales Invoice Item-qty-read_only_depends_on",
                 "Delivery Note Item-uom-read_only_depends_on",
-                "Delivery Note Item-qty-read_only_depends_on",
-                "Stock Entry Detail-uom-read_only_depends_on",
-                "Stock Entry Detail-qty-read_only_depends_on",
-                "Purchase Receipt Item-conversion_factor-precision",
-                "Purchase Invoice Item-conversion_factor-precision",
-                "Sales Order Item-conversion_factor-precision",
-                "Delivery Note Item-conversion_factor-precision",
-                "Sales Invoice Item-conversion_factor-precision",
-                "Purchase Order Item-conversion_factor-precision"
+                "Stock Entry Detail-uom-read_only_depends_on"
             ]
         ]
     ]},
