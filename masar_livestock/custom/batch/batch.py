@@ -1,7 +1,7 @@
 import frappe
 from frappe.utils import flt
 
-
+##
 def sum_weight(query, batch):
     data = frappe.db.sql(query, {"batch": batch}, as_dict=True)
     return sum(flt(d.weight) for d in data)
