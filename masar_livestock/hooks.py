@@ -294,9 +294,6 @@ fixtures = [
                 "Stock Entry Detail-custom_headcount",
                 "Purchase Order Item-custom_headcount",
                 "Sales Order Item-custom_headcount",
-                "Batch-custom_current_weight_kg",
-                "Batch-custom_in_weight_kg",
-                "Batch-custom_out_weight_kg",
                 "Purchase Receipt Item-custom_is_livestock",
                 "Purchase Order Item-custom_is_livestock",
                 "Purchase Invoice Item-custom_is_livestock",
@@ -310,7 +307,11 @@ fixtures = [
                 "Purchase Invoice Item-custom_weight_per_unit",
                 "Purchase Receipt Item-custom_weight_per_unit",
                 "Purchase Order Item-custom_weight_per_unit",
-                "Stock Entry Detail-custom_weight_per_unit"
+                "Stock Entry Detail-custom_weight_per_unit",
+                "Batch-custom_initial_headcount",
+                "Batch-custom_headcount_remaining",
+                "Stock Ledger Entry-custom_headcount",
+                "Serial and Batch Entry-custom_headcount"
             ]
         ]
     ]},
