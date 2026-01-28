@@ -149,38 +149,47 @@ doctype_js = {
 doc_events = {
 	"Purchase Receipt": {
 		"validate": "masar_livestock.custom.purchase_receipt.purchase_receipt.validate",
-        # "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
+        "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
+        "on_cancel": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_cancel",
 	},
     "Purchase Order": {
         "validate": "masar_livestock.custom.purchase_order.purchase_order.validate",
     },
     "Purchase Invoice": {
         "validate": "masar_livestock.custom.purchase_invoice.purchase_invoice.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
     },
     "Sales Order": {
         "validate": "masar_livestock.custom.sales_order.sales_order.validate",
     },
     "Delivery Note": {
         "validate": "masar_livestock.custom.delivery_note.delivery_note.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
     },
     "Stock Entry": {
         "validate": "masar_livestock.custom.stock_entry.stock_entry.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
     },
     "Sales Invoice": {
         "validate": "masar_livestock.custom.sales_invoice.sales_invoice.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
     },
 }
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"masar_livestock.tasks.all"
 # 	],
-# 	"daily": [
-# 		"masar_livestock.tasks.daily"
-# 	],
+	"daily": [
+		"masar_livestock.jobs.repost_headcount.repost_livestock_headcount"
+	],
 # 	"hourly": [
 # 		"masar_livestock.tasks.hourly"
 # 	],
@@ -190,7 +199,7 @@ doc_events = {
 # 	"monthly": [
 # 		"masar_livestock.tasks.monthly"
 # 	],
-# }
+}
 
 # Testing
 # -------
