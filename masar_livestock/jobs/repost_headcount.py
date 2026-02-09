@@ -1,59 +1,109 @@
 import frappe
 
-def repost_livestock_headcount():
+
+def reset_livestock_batches():
+    batches = frappe.get_all(
+        "Batch",
+        fields=["name"]
+    )
+
+    for b in batches:
+        frappe.db.set_value(
+            "Batch",
+            b.name,
+            {
+                "custom_initial_weight": 0,
+                "custom_weight_remaining": 0,
+            }
+        )
+
+    frappe.db.commit()
+
+
+def repost_livestock_weight():
+    reset_livestock_batches()
+
     sles = frappe.get_all(
         "Stock Ledger Entry",
-        filters={"docstatus": 1, "custom_headcount": [">", 0]},
-        fields=["name", "item_code", "custom_headcount", "actual_qty", "serial_and_batch_bundle", "voucher_no", "voucher_type", "voucher_detail_no"]
+        filters={
+            "docstatus": 1,
+            "custom_weight_kg": ["!=", 0],
+            "is_cancelled": 0,
+        },
+        fields=[
+            "item_code",
+            "actual_qty",
+            "serial_and_batch_bundle",
+            "voucher_no",
+            "voucher_type",
+            "voucher_detail_no",
+            "posting_date",
+            "posting_time",
+            "creation",
+        ],
+        order_by="posting_date asc, posting_time asc, creation asc",
     )
 
     for sle in sles:
-        item_doc = frappe.get_cached_doc("Item", sle.item_code)
-        if not item_doc.custom_is_livestock:
+        item = frappe.get_cached_doc("Item", sle.item_code)
+        if not item.custom_is_livestock:
             continue
 
-        weight_per_unit = None
-        if sle.voucher_type and sle.voucher_no and sle.voucher_detail_no:
-            row = frappe.get_doc(sle.voucher_type, sle.voucher_no).get("items", {"name": sle.voucher_detail_no})
-            if row:
-                weight_per_unit = row[0].get("custom_weight_per_unit")
-
-        if not weight_per_unit:
-            weight_per_unit = item_doc.custom_weight_per_unit
-
-        if not weight_per_unit:
-            frappe.throw(f"Cannot determine weight per unit for item {item_doc.name}")
+        weight_per_unit = get_weight_per_unit(sle, item)
 
         if sle.serial_and_batch_bundle:
-            repost_sabb_headcount(sle.serial_and_batch_bundle, weight_per_unit)
+            repost_sabb_weight(
+                sle.serial_and_batch_bundle,
+                weight_per_unit,
+                sle.actual_qty
+            )
 
-def repost_sabb_headcount(sabb_name, weight_per_unit):
+
+def get_weight_per_unit(sle, item):
+    if sle.voucher_type and sle.voucher_no and sle.voucher_detail_no:
+        doc = frappe.get_doc(sle.voucher_type, sle.voucher_no)
+        row = doc.get("items", {"name": sle.voucher_detail_no})
+        if row and row[0].custom_weight_per_unit:
+            return row[0].custom_weight_per_unit
+
+    if item.custom_weight_per_unit:
+        return item.custom_weight_per_unit
+
+    frappe.throw(
+        f"Cannot determine weight per unit for livestock item {item.name}"
+    )
+
+
+def repost_sabb_weight(sabb_name, weight_per_unit, sle_actual_qty):
     sabb = frappe.get_doc("Serial and Batch Bundle", sabb_name)
 
     for entry in sabb.entries:
-        entry_headcount = round(abs(entry.qty) / weight_per_unit)
-        entry.custom_headcount = entry_headcount
+        # Weight should have the same sign as qty
+        entry_weight = entry.qty * weight_per_unit  # ✅ Signed weight
+        entry.custom_weight_kg = entry_weight
 
         if entry.batch_no:
-            update_batch_headcount(entry.batch_no, entry.qty, entry_headcount)
+            update_batch_weight(
+                entry.batch_no,
+                entry.qty,
+                entry_weight
+            )
 
     sabb.save(ignore_permissions=True)
 
-def update_batch_headcount(batch_no, qty_moved, headcount_change):
+
+def update_batch_weight(batch_no, qty_moved, moved_weight):
     batch = frappe.get_doc("Batch", batch_no)
 
-    if not batch.custom_initial_headcount and qty_moved > 0:
-        batch.custom_initial_headcount = headcount_change
-        batch.custom_headcount_remaining = headcount_change
-        batch.save(ignore_permissions=True)
-        return
-
-    if qty_moved < 0:
-        batch.custom_headcount_remaining -= headcount_change
+    if qty_moved > 0:
+        if not batch.custom_initial_weight:
+            batch.custom_initial_weight = abs(moved_weight)
+        
+        batch.custom_weight_remaining += abs(moved_weight)
     else:
-        batch.custom_headcount_remaining += headcount_change
+        batch.custom_weight_remaining -= abs(moved_weight)
 
-    if batch.custom_headcount_remaining < 0:
-        batch.custom_headcount_remaining = 0
+    if batch.custom_weight_remaining < 0:
+        batch.custom_weight_remaining = 0
 
     batch.save(ignore_permissions=True)

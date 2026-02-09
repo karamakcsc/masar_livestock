@@ -188,7 +188,7 @@ scheduler_events = {
 # 		"masar_livestock.tasks.all"
 # 	],
 	"daily": [
-		"masar_livestock.jobs.repost_headcount.repost_livestock_headcount"
+		"masar_livestock.jobs.repost_headcount.repost_livestock_weight"
 	],
 # 	"hourly": [
 # 		"masar_livestock.tasks.hourly"
@@ -287,13 +287,6 @@ fixtures = [
         [
             "name", "in", [
                 "Item-custom_is_livestock",
-                "Purchase Receipt Item-custom_headcount",
-                "Purchase Invoice Item-custom_headcount",
-                "Delivery Note Item-custom_headcount",
-                "Sales Invoice Item-custom_headcount",
-                "Stock Entry Detail-custom_headcount",
-                "Purchase Order Item-custom_headcount",
-                "Sales Order Item-custom_headcount",
                 "Purchase Receipt Item-custom_is_livestock",
                 "Purchase Order Item-custom_is_livestock",
                 "Purchase Invoice Item-custom_is_livestock",
@@ -308,10 +301,24 @@ fixtures = [
                 "Purchase Receipt Item-custom_weight_per_unit",
                 "Purchase Order Item-custom_weight_per_unit",
                 "Stock Entry Detail-custom_weight_per_unit",
-                "Batch-custom_initial_headcount",
-                "Batch-custom_headcount_remaining",
-                "Stock Ledger Entry-custom_headcount",
-                "Serial and Batch Entry-custom_headcount"
+                "Batch-custom_ship_name",
+                "Purchase Invoice Item-custom_weight_kg",
+                "Purchase Invoice Item-custom_rate_kg",
+                "Sales Order Item-custom_weight_kg",
+                "Sales Order Item-custom_rate_kg",
+                "Sales Invoice Item-custom_weight_kg",
+                "Sales Invoice Item-custom_rate_kg",
+                "Delivery Note Item-custom_weight_kg",
+                "Delivery Note Item-custom_rate_kg",
+                "Stock Entry Detail-custom_weight_kg",
+                "Stock Ledger Entry-custom_weight_kg",
+                "Serial and Batch Entry-custom_weight_kg",
+                "Batch-custom_weight_remaining",
+                "Batch-custom_initial_weight",
+                "Purchase Order Item-custom_weight_kg",
+                "Purchase Receipt Item-custom_weight_kg",
+                "Purchase Receipt Item-custom_rate_kg",
+                "Purchase Order Item-custom_rate_kg"
             ]
         ]
     ]},
@@ -337,7 +344,15 @@ fixtures = [
                 "Sales Order Item-uom-read_only_depends_on",
                 "Sales Invoice Item-uom-read_only_depends_on",
                 "Delivery Note Item-uom-read_only_depends_on",
-                "Stock Entry Detail-uom-read_only_depends_on"
+                "Stock Entry Detail-uom-read_only_depends_on",
+                "Sales Invoice Item-item_code-columns",
+                "Sales Order Item-item_code-columns",
+                "Purchase Invoice Item-item_code-columns",
+                "Purchase Receipt Item-qty-columns",
+                "Purchase Order Item-schedule_date-columns",
+                "Batch-main-field_order",
+                "Stock Entry Detail-main-field_order",
+                "Stock Ledger Entry-main-field_order"
             ]
         ]
     ]},
