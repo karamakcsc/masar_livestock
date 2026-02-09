@@ -163,10 +163,6 @@ def update_batch_weight(batch_no, qty_moved, weight_per_unit):
     else:
         batch.custom_weight_remaining += moved_weight
 
-    if batch.custom_weight_remaining < 0:
-        frappe.throw(
-            f"Batch {batch.name} has insufficient livestock weight"
-        )
 
     batch.save(ignore_permissions=True)
 
