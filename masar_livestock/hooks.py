@@ -51,7 +51,6 @@ doctype_js = {
     "Delivery Note" : "custom/delivery_note/delivery_note.js",
     "Stock Entry" : "custom/stock_entry/stock_entry.js",
     "Sales Invoice" : "custom/sales_invoice/sales_invoice.js",
-    "Batch": "custom/batch/batch.js",
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -318,7 +317,34 @@ fixtures = [
                 "Purchase Order Item-custom_weight_kg",
                 "Purchase Receipt Item-custom_weight_kg",
                 "Purchase Receipt Item-custom_rate_kg",
-                "Purchase Order Item-custom_rate_kg"
+                "Purchase Order Item-custom_rate_kg",
+                "Sales Invoice Item-custom_feed_consumption",
+                "Sales Invoice Item-custom_purchase_date",
+                "Sales Invoice Item-custom_feed_item",
+                "Sales Invoice Item-custom_feed_cost_per_kg",
+                "Sales Invoice Item-custom_total_feed_cost",
+                "Sales Invoice Item-custom_column_break_wqu6t",
+                "Sales Invoice Item-custom_no_of_days",
+                "Sales Invoice Item-custom_feed_qty_per_day",
+                "Sales Invoice Item-custom_feed_cost_per_day",
+                "Delivery Note Item-custom_feed_consumption",
+                "Delivery Note Item-custom_purchase_date",
+                "Delivery Note Item-custom_feed_item",
+                "Delivery Note Item-custom_feed_cost_per_kg",
+                "Delivery Note Item-custom_total_feed_cost",
+                "Delivery Note Item-custom_column_break_k5f1v",
+                "Delivery Note Item-custom_no_of_days",
+                "Delivery Note Item-custom_feed_qty_per_day",
+                "Delivery Note Item-custom_feed_cost_per_day",
+                "Stock Entry Detail-custom_feed_consumption",
+                "Stock Entry Detail-custom_purchase_date",
+                "Stock Entry Detail-custom_feed_item",
+                "Stock Entry Detail-custom_feed_cost_per_kg",
+                "Stock Entry Detail-custom_total_feed_cost",
+                "Stock Entry Detail-custom_column_break_bt4s0",
+                "Stock Entry Detail-custom_no_of_days",
+                "Stock Entry Detail-custom_feed_qty_per_day",
+                "Stock Entry Detail-custom_feed_cost_per_day"
             ]
         ]
     ]},
@@ -349,10 +375,7 @@ fixtures = [
                 "Sales Order Item-item_code-columns",
                 "Purchase Invoice Item-item_code-columns",
                 "Purchase Receipt Item-qty-columns",
-                "Purchase Order Item-schedule_date-columns",
-                "Batch-main-field_order",
-                "Stock Entry Detail-main-field_order",
-                "Stock Ledger Entry-main-field_order"
+                "Purchase Order Item-schedule_date-columns"
             ]
         ]
     ]},

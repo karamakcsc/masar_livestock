@@ -1,5 +1,5 @@
 import frappe
-from frappe.utils import flt, cint
+from frappe.utils import flt, cint, getdate
 
 
 def validate_livestock_items(self):
@@ -182,3 +182,36 @@ def update_sabb_and_batches_weight(sabb_name, weight_per_unit):
 
     sabb.save(ignore_permissions=True)
 
+
+@frappe.whitelist()
+def calculate_feed_cost(posting_date, item_code, feed_qty_per_day=None, feed_item=None):
+    if not posting_date or not item_code:
+        return
+    
+    feed_qty_per_day = flt(feed_qty_per_day)
+
+    if feed_qty_per_day <= 0:
+        feed_qty_per_day = frappe.db.get_single_value("Feed Settings", "default_feed_qty_per_day")
+    if not feed_item:
+        feed_item = frappe.db.get_single_value("Feed Settings", "default_feed_item")
+    
+        
+    purchase_date = frappe.db.get_value("Batch", {"item": item_code}, "manufacturing_date")
+    
+    no_of_days = (getdate(posting_date) - getdate(purchase_date)).days + 1
+    
+    feed_cost_kg = frappe.db.get_value("Stock Ledger Entry", {"item_code": feed_item, "posting_date": ("<=", posting_date)}, "valuation_rate", order_by="posting_date desc")
+    
+    feed_cost_day = flt(feed_qty_per_day) * flt(feed_cost_kg)
+    
+    total_feed_cost = feed_cost_day * no_of_days
+    
+    return {
+        "purchase_date": purchase_date,
+        "no_of_days": no_of_days,
+        "feed_item": feed_item,
+        "feed_qty_per_day": feed_qty_per_day,
+        "feed_cost_kg": feed_cost_kg,
+        "feed_cost_day": feed_cost_day,
+        "total_feed_cost": total_feed_cost
+    }

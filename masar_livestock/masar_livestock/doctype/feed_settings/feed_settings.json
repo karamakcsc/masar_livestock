@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-17 16:33:52.420591",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_feed_item",
+  "column_break_ttos",
+  "default_feed_qty_per_day"
+ ],
+ "fields": [
+  {
+   "fieldname": "default_feed_item",
+   "fieldtype": "Link",
+   "label": "Default Feed Item",
+   "link_filters": "[[\"Item\",\"custom_is_livestock\",\"=\",0]]",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_ttos",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_feed_qty_per_day",
+   "fieldtype": "Float",
+   "label": "Default Feed Qty Per Day (Kg)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-02-17 16:36:55.593795",
+ "modified_by": "Administrator",
+ "module": "Masar Livestock",
+ "name": "Feed Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
