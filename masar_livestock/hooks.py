@@ -43,15 +43,15 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {
-#     "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js",
-#     "Purchase Order" : "custom/purchase_order/purchase_order.js",
-#     "Purchase Invoice" : "custom/purchase_invoice/purchase_invoice.js",
-#     "Sales Order" : "custom/sales_order/sales_order.js",
-#     "Delivery Note" : "custom/delivery_note/delivery_note.js",
-#     "Stock Entry" : "custom/stock_entry/stock_entry.js",
-#     "Sales Invoice" : "custom/sales_invoice/sales_invoice.js",
-# }
+doctype_js = {
+    "Purchase Receipt" : "custom/purchase_receipt/purchase_receipt.js",
+    "Purchase Order" : "custom/purchase_order/purchase_order.js",
+    "Purchase Invoice" : "custom/purchase_invoice/purchase_invoice.js",
+    "Sales Order" : "custom/sales_order/sales_order.js",
+    "Delivery Note" : "custom/delivery_note/delivery_note.js",
+    "Stock Entry" : "custom/stock_entry/stock_entry.js",
+    "Sales Invoice" : "custom/sales_invoice/sales_invoice.js",
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -145,39 +145,39 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"Purchase Receipt": {
-# 		"validate": "masar_livestock.custom.purchase_receipt.purchase_receipt.validate",
-#         "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
-#         "on_cancel": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_cancel",
-# 	},
-#     "Purchase Order": {
-#         "validate": "masar_livestock.custom.purchase_order.purchase_order.validate",
-#     },
-#     "Purchase Invoice": {
-#         "validate": "masar_livestock.custom.purchase_invoice.purchase_invoice.validate",
-#         "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-#         "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
-#     },
-#     "Sales Order": {
-#         "validate": "masar_livestock.custom.sales_order.sales_order.validate",
-#     },
-#     "Delivery Note": {
-#         "validate": "masar_livestock.custom.delivery_note.delivery_note.validate",
-#         "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-#         "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
-#     },
-#     "Stock Entry": {
-#         "validate": "masar_livestock.custom.stock_entry.stock_entry.validate",
-#         "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-#         "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
-#     },
-#     "Sales Invoice": {
-#         "validate": "masar_livestock.custom.sales_invoice.sales_invoice.validate",
-#         "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-#         "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
-#     },
-# }
+doc_events = {
+	"Purchase Receipt": {
+		"validate": "masar_livestock.custom.purchase_receipt.purchase_receipt.validate",
+        "on_submit": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_submit",
+        "on_cancel": "masar_livestock.custom.purchase_receipt.purchase_receipt.on_cancel",
+	},
+    "Purchase Order": {
+        "validate": "masar_livestock.custom.purchase_order.purchase_order.validate",
+    },
+    "Purchase Invoice": {
+        "validate": "masar_livestock.custom.purchase_invoice.purchase_invoice.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+    },
+    "Sales Order": {
+        "validate": "masar_livestock.custom.sales_order.sales_order.validate",
+    },
+    "Delivery Note": {
+        "validate": "masar_livestock.custom.delivery_note.delivery_note.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+    },
+    "Stock Entry": {
+        "validate": "masar_livestock.custom.stock_entry.stock_entry.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+    },
+    "Sales Invoice": {
+        "validate": "masar_livestock.custom.sales_invoice.sales_invoice.validate",
+        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
+        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+    },
+}
 
 # Scheduled Tasks
 # ---------------
@@ -281,102 +281,102 @@ scheduler_events = {
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
-# fixtures = [
-#     {"dt": "Custom Field", "filters": [
-#         [
-#             "name", "in", [
-#                 "Item-custom_is_livestock",
-#                 "Purchase Receipt Item-custom_is_livestock",
-#                 "Purchase Order Item-custom_is_livestock",
-#                 "Purchase Invoice Item-custom_is_livestock",
-#                 "Sales Order Item-custom_is_livestock",
-#                 "Delivery Note Item-custom_is_livestock",
-#                 "Stock Entry Detail-custom_is_livestock",
-#                 "Sales Invoice Item-custom_is_livestock",
-#                 "Delivery Note Item-custom_weight_per_unit",
-#                 "Sales Invoice Item-custom_weight_per_unit",
-#                 "Sales Order Item-custom_weight_per_unit",
-#                 "Purchase Invoice Item-custom_weight_per_unit",
-#                 "Purchase Receipt Item-custom_weight_per_unit",
-#                 "Purchase Order Item-custom_weight_per_unit",
-#                 "Stock Entry Detail-custom_weight_per_unit",
-#                 "Batch-custom_ship_name",
-#                 "Purchase Invoice Item-custom_weight_kg",
-#                 "Purchase Invoice Item-custom_rate_kg",
-#                 "Sales Order Item-custom_weight_kg",
-#                 "Sales Order Item-custom_rate_kg",
-#                 "Sales Invoice Item-custom_weight_kg",
-#                 "Sales Invoice Item-custom_rate_kg",
-#                 "Delivery Note Item-custom_weight_kg",
-#                 "Delivery Note Item-custom_rate_kg",
-#                 "Stock Entry Detail-custom_weight_kg",
-#                 "Stock Ledger Entry-custom_weight_kg",
-#                 "Serial and Batch Entry-custom_weight_kg",
-#                 "Batch-custom_weight_remaining",
-#                 "Batch-custom_initial_weight",
-#                 "Purchase Order Item-custom_weight_kg",
-#                 "Purchase Receipt Item-custom_weight_kg",
-#                 "Purchase Receipt Item-custom_rate_kg",
-#                 "Purchase Order Item-custom_rate_kg",
-#                 "Sales Invoice Item-custom_feed_consumption",
-#                 "Sales Invoice Item-custom_purchase_date",
-#                 "Sales Invoice Item-custom_feed_item",
-#                 "Sales Invoice Item-custom_feed_cost_per_kg",
-#                 "Sales Invoice Item-custom_total_feed_cost",
-#                 "Sales Invoice Item-custom_column_break_wqu6t",
-#                 "Sales Invoice Item-custom_no_of_days",
-#                 "Sales Invoice Item-custom_feed_qty_per_day",
-#                 "Sales Invoice Item-custom_feed_cost_per_day",
-#                 "Delivery Note Item-custom_feed_consumption",
-#                 "Delivery Note Item-custom_purchase_date",
-#                 "Delivery Note Item-custom_feed_item",
-#                 "Delivery Note Item-custom_feed_cost_per_kg",
-#                 "Delivery Note Item-custom_total_feed_cost",
-#                 "Delivery Note Item-custom_column_break_k5f1v",
-#                 "Delivery Note Item-custom_no_of_days",
-#                 "Delivery Note Item-custom_feed_qty_per_day",
-#                 "Delivery Note Item-custom_feed_cost_per_day",
-#                 "Stock Entry Detail-custom_feed_consumption",
-#                 "Stock Entry Detail-custom_purchase_date",
-#                 "Stock Entry Detail-custom_feed_item",
-#                 "Stock Entry Detail-custom_feed_cost_per_kg",
-#                 "Stock Entry Detail-custom_total_feed_cost",
-#                 "Stock Entry Detail-custom_column_break_bt4s0",
-#                 "Stock Entry Detail-custom_no_of_days",
-#                 "Stock Entry Detail-custom_feed_qty_per_day",
-#                 "Stock Entry Detail-custom_feed_cost_per_day"
-#             ]
-#         ]
-#     ]},
-#     {"dt": "Property Setter", "filters": [
-#         [
-#             "name", "in", [
-#                 "Purchase Receipt Item-rate-columns",
-#                 "Purchase Order Item-rate-columns",
-#                 "Purchase Order Item-amount-columns",
-#                 "Purchase Invoice Item-qty-columns",
-#                 "Purchase Invoice Item-rate-columns",
-#                 "Sales Order Item-delivery_date-columns",
-#                 "Sales Order Item-rate-columns",
-#                 "Delivery Note Item-uom-columns",
-#                 "Delivery Note Item-qty-columns",
-#                 "Stock Entry Detail-qty-columns",
-#                 "Stock Entry Detail-basic_rate-columns",
-#                 "Sales Invoice Item-qty-columns",
-#                 "Sales Invoice Item-rate-columns",
-#                 "Purchase Order Item-uom-read_only_depends_on",
-#                 "Purchase Receipt Item-uom-read_only_depends_on",
-#                 "Purchase Invoice Item-uom-read_only_depends_on",
-#                 "Sales Order Item-uom-read_only_depends_on",
-#                 "Sales Invoice Item-uom-read_only_depends_on",
-#                 "Delivery Note Item-uom-read_only_depends_on",
-#                 "Stock Entry Detail-uom-read_only_depends_on",
-#                 "Sales Invoice Item-item_code-columns",
-#                 "Sales Order Item-item_code-columns",
-#                 "Purchase Invoice Item-item_code-columns",
-#                 "Purchase Receipt Item-qty-columns",
-#                 "Purchase Order Item-schedule_date-columns"
-#             ]
-#         ]
-#     ]},
-# ]
+fixtures = [
+    {"dt": "Custom Field", "filters": [
+        [
+            "name", "in", [
+                "Item-custom_is_livestock",
+                "Purchase Receipt Item-custom_is_livestock",
+                "Purchase Order Item-custom_is_livestock",
+                "Purchase Invoice Item-custom_is_livestock",
+                "Sales Order Item-custom_is_livestock",
+                "Delivery Note Item-custom_is_livestock",
+                "Stock Entry Detail-custom_is_livestock",
+                "Sales Invoice Item-custom_is_livestock",
+                "Delivery Note Item-custom_weight_per_unit",
+                "Sales Invoice Item-custom_weight_per_unit",
+                "Sales Order Item-custom_weight_per_unit",
+                "Purchase Invoice Item-custom_weight_per_unit",
+                "Purchase Receipt Item-custom_weight_per_unit",
+                "Purchase Order Item-custom_weight_per_unit",
+                "Stock Entry Detail-custom_weight_per_unit",
+                "Batch-custom_ship_name",
+                "Purchase Invoice Item-custom_weight_kg",
+                "Purchase Invoice Item-custom_rate_kg",
+                "Sales Order Item-custom_weight_kg",
+                "Sales Order Item-custom_rate_kg",
+                "Sales Invoice Item-custom_weight_kg",
+                "Sales Invoice Item-custom_rate_kg",
+                "Delivery Note Item-custom_weight_kg",
+                "Delivery Note Item-custom_rate_kg",
+                "Stock Entry Detail-custom_weight_kg",
+                "Stock Ledger Entry-custom_weight_kg",
+                "Serial and Batch Entry-custom_weight_kg",
+                "Batch-custom_weight_remaining",
+                "Batch-custom_initial_weight",
+                "Purchase Order Item-custom_weight_kg",
+                "Purchase Receipt Item-custom_weight_kg",
+                "Purchase Receipt Item-custom_rate_kg",
+                "Purchase Order Item-custom_rate_kg",
+                "Sales Invoice Item-custom_feed_consumption",
+                "Sales Invoice Item-custom_purchase_date",
+                "Sales Invoice Item-custom_feed_item",
+                "Sales Invoice Item-custom_feed_cost_per_kg",
+                "Sales Invoice Item-custom_total_feed_cost",
+                "Sales Invoice Item-custom_column_break_wqu6t",
+                "Sales Invoice Item-custom_no_of_days",
+                "Sales Invoice Item-custom_feed_qty_per_day",
+                "Sales Invoice Item-custom_feed_cost_per_day",
+                "Delivery Note Item-custom_feed_consumption",
+                "Delivery Note Item-custom_purchase_date",
+                "Delivery Note Item-custom_feed_item",
+                "Delivery Note Item-custom_feed_cost_per_kg",
+                "Delivery Note Item-custom_total_feed_cost",
+                "Delivery Note Item-custom_column_break_k5f1v",
+                "Delivery Note Item-custom_no_of_days",
+                "Delivery Note Item-custom_feed_qty_per_day",
+                "Delivery Note Item-custom_feed_cost_per_day",
+                "Stock Entry Detail-custom_feed_consumption",
+                "Stock Entry Detail-custom_purchase_date",
+                "Stock Entry Detail-custom_feed_item",
+                "Stock Entry Detail-custom_feed_cost_per_kg",
+                "Stock Entry Detail-custom_total_feed_cost",
+                "Stock Entry Detail-custom_column_break_bt4s0",
+                "Stock Entry Detail-custom_no_of_days",
+                "Stock Entry Detail-custom_feed_qty_per_day",
+                "Stock Entry Detail-custom_feed_cost_per_day"
+            ]
+        ]
+    ]},
+    {"dt": "Property Setter", "filters": [
+        [
+            "name", "in", [
+                "Purchase Receipt Item-rate-columns",
+                "Purchase Order Item-rate-columns",
+                "Purchase Order Item-amount-columns",
+                "Purchase Invoice Item-qty-columns",
+                "Purchase Invoice Item-rate-columns",
+                "Sales Order Item-delivery_date-columns",
+                "Sales Order Item-rate-columns",
+                "Delivery Note Item-uom-columns",
+                "Delivery Note Item-qty-columns",
+                "Stock Entry Detail-qty-columns",
+                "Stock Entry Detail-basic_rate-columns",
+                "Sales Invoice Item-qty-columns",
+                "Sales Invoice Item-rate-columns",
+                "Purchase Order Item-uom-read_only_depends_on",
+                "Purchase Receipt Item-uom-read_only_depends_on",
+                "Purchase Invoice Item-uom-read_only_depends_on",
+                "Sales Order Item-uom-read_only_depends_on",
+                "Sales Invoice Item-uom-read_only_depends_on",
+                "Delivery Note Item-uom-read_only_depends_on",
+                "Stock Entry Detail-uom-read_only_depends_on",
+                "Sales Invoice Item-item_code-columns",
+                "Sales Order Item-item_code-columns",
+                "Purchase Invoice Item-item_code-columns",
+                "Purchase Receipt Item-qty-columns",
+                "Purchase Order Item-schedule_date-columns"
+            ]
+        ]
+    ]},
+]
