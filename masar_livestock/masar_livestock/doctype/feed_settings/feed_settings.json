@@ -7,7 +7,12 @@
  "field_order": [
   "default_feed_item",
   "column_break_ttos",
-  "default_feed_qty_per_day"
+  "default_feed_qty_per_day",
+  "section_break_mibc",
+  "feed_consumption_debit",
+  "feed_consumption_issue",
+  "column_break_lzqt",
+  "feed_consumption_credit"
  ],
  "fields": [
   {
@@ -25,14 +30,40 @@
    "fieldname": "default_feed_qty_per_day",
    "fieldtype": "Float",
    "label": "Default Feed Qty Per Day (Kg)"
+  },
+  {
+   "fieldname": "section_break_mibc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "feed_consumption_debit",
+   "fieldtype": "Link",
+   "label": "Feed Consumption Debit",
+   "options": "Account"
+  },
+  {
+   "fieldname": "feed_consumption_issue",
+   "fieldtype": "Link",
+   "label": "Feed Consumption Issue",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_lzqt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "feed_consumption_credit",
+   "fieldtype": "Link",
+   "label": "Feed Consumption Credit",
+   "options": "Account"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-02-17 16:36:55.593795",
- "modified_by": "Administrator",
+ "modified": "2026-03-05 10:37:41.692945",
+ "modified_by": "frappe@kcsc.com.jo",
  "module": "Masar Livestock",
  "name": "Feed Settings",
  "owner": "Administrator",
