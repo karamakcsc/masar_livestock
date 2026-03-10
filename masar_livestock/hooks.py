@@ -156,16 +156,16 @@ doc_events = {
     },
     "Purchase Invoice": {
         "validate": "masar_livestock.custom.purchase_invoice.purchase_invoice.validate",
-        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+        "on_submit": "masar_livestock.custom.purchase_invoice.purchase_invoice.on_submit",
+        "on_cancel": "masar_livestock.custom.purchase_invoice.purchase_invoice.on_cancel",
     },
     "Sales Order": {
         "validate": "masar_livestock.custom.sales_order.sales_order.validate",
     },
     "Delivery Note": {
         "validate": "masar_livestock.custom.delivery_note.delivery_note.validate",
-        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+        "on_submit": "masar_livestock.custom.delivery_note.delivery_note.on_submit",
+        "on_cancel": "masar_livestock.custom.delivery_note.delivery_note.on_cancel",
     },
     "Stock Entry": {
         "validate": "masar_livestock.custom.stock_entry.stock_entry.validate",
@@ -174,8 +174,8 @@ doc_events = {
     },
     "Sales Invoice": {
         "validate": "masar_livestock.custom.sales_invoice.sales_invoice.validate",
-        "on_submit": "masar_livestock.custom.stock_entry.stock_entry.on_submit",
-        "on_cancel": "masar_livestock.custom.stock_entry.stock_entry.on_cancel",
+        "on_submit": "masar_livestock.custom.sales_invoice.sales_invoice.on_submit",
+        "on_cancel": "masar_livestock.custom.sales_invoice.sales_invoice.on_cancel",
     },
 }
 
@@ -344,7 +344,9 @@ fixtures = [
                 "Stock Entry Detail-custom_column_break_bt4s0",
                 "Stock Entry Detail-custom_no_of_days",
                 "Stock Entry Detail-custom_feed_qty_per_day",
-                "Stock Entry Detail-custom_feed_cost_per_day"
+                "Stock Entry Detail-custom_feed_cost_per_day",
+                "Journal Entry-custom_reference_doctype",
+                "Journal Entry-custom_reference_docname"
             ]
         ]
     ]},

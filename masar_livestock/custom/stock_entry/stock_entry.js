@@ -31,10 +31,21 @@ frappe.ui.form.on('Stock Entry Detail', {
     }
 });
 
+frappe.ui.form.on("Stock Entry", {
+    validate: function(frm) {
+        if (frm.doc.purpose === "Material Issue") {
+            frm.doc.items.forEach(function(item) {
+                if (item.custom_is_livestock) {
+                    calculate_feed_cost(frm, item.doctype, item.name);
+                }
+            });
+        }
+    }
+});
 
 function calculate_feed_cost(frm, cdt, cdn) {
     let row = locals[cdt][cdn];
-    if (row.item_code) {
+    if (row.item_code && row.custom_is_livestock) {
         let posting_date = frm.doc.posting_date;
         let item_code = row.item_code;
         let feed_qty_per_day = row.custom_feed_qty_per_day;

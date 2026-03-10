@@ -215,3 +215,47 @@ def calculate_feed_cost(posting_date, item_code, feed_qty_per_day=None, feed_ite
         "feed_cost_day": feed_cost_day,
         "total_feed_cost": total_feed_cost
     }
+
+def create_jv(self):
+
+    exists = frappe.db.exists(
+        "Journal Entry",
+        {"custom_reference_doctype": self.doctype, "custom_reference_docname": self.name}
+    )
+
+    if exists:
+        return
+
+    dr_account = frappe.db.get_single_value("Feed Settings", "feed_consumption_debit")
+    cr_account = frappe.db.get_single_value("Feed Settings", "feed_consumption_credit")
+    dr_issue_account = frappe.db.get_single_value("Feed Settings", "feed_consumption_issue")
+
+    feed_cost_amount = sum(
+        flt(d.custom_total_feed_cost)
+        for d in self.items
+        if d.custom_is_livestock == 1
+    )
+
+    if not feed_cost_amount:
+        return
+
+    new_jv = frappe.new_doc("Journal Entry")
+    new_jv.posting_date = self.posting_date
+    new_jv.company = self.company
+    new_jv.custom_reference_doctype = self.doctype
+    new_jv.custom_reference_docname = self.name
+
+    new_jv.append("accounts", {
+        "account": dr_account,
+        "debit_in_account_currency": feed_cost_amount,
+        "debit": feed_cost_amount,
+    })
+
+    new_jv.append("accounts", {
+        "account": cr_account if self.doctype != "Stock Entry" else dr_issue_account,
+        "credit_in_account_currency": feed_cost_amount,
+        "credit": feed_cost_amount,
+    })
+
+    new_jv.save(ignore_permissions=True)
+    new_jv.submit()
