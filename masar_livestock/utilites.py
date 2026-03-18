@@ -17,17 +17,24 @@ def validate_livestock_items(self):
                 f"for livestock item {row.item_code} in row {row.idx}"
             )
 
-        qty = cint(row.qty)
-        weight_kg = -(abs(flt(row.custom_weight_kg))) if self.is_return else flt(row.custom_weight_kg)
-        rate_kg = flt(getattr(row, "custom_rate_kg", None))
-        
-        weight_per_unit = flt(weight_kg / qty)
+        qty = flt(row.qty)
 
+        if qty == 0:
+            frappe.throw(f"Qty cannot be zero in row {row.idx}")
+
+        weight_kg = abs(flt(row.custom_weight_kg))
+        rate_kg = flt(getattr(row, "custom_rate_kg", 0))
+
+        weight_per_unit = weight_kg / abs(qty)
         row.custom_weight_per_unit = weight_per_unit
+
         if rate_kg:
-            if self.is_return:
-                base_rate = rate_kg * weight_per_unit
-                row.rate = base_rate # -abs(base_rate) if self.is_return else abs(base_rate)
+            base_rate = rate_kg * weight_per_unit
+
+            if not self.is_return:
+                row.rate = abs(base_rate)
+            else:
+                row.rate = abs(row.rate)
 
 def set_weight_sle_sabb(self):
     sles = frappe.get_all(
