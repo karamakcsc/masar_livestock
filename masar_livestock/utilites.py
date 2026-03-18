@@ -18,14 +18,16 @@ def validate_livestock_items(self):
             )
 
         qty = cint(row.qty)
-        weight_kg = flt(row.custom_weight_kg)
+        weight_kg = -(abs(flt(row.custom_weight_kg))) if self.is_return else flt(row.custom_weight_kg)
         rate_kg = flt(getattr(row, "custom_rate_kg", None))
         
         weight_per_unit = flt(weight_kg / qty)
 
         row.custom_weight_per_unit = weight_per_unit
         if rate_kg:
-            row.rate = rate_kg * weight_per_unit
+            if self.is_return:
+                base_rate = rate_kg * weight_per_unit
+                row.rate = base_rate # -abs(base_rate) if self.is_return else abs(base_rate)
 
 def set_weight_sle_sabb(self):
     sles = frappe.get_all(
